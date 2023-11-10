@@ -75,18 +75,17 @@
                         Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
                     }
                 }
-                // TODO: Break out new method
-                else if (command == "new") // NYI: Prevent empty strings
+                else if (command == "new")
                 {
                     if (argument.Length == 3)
                     {
-                        dictionary.Add(new SweEngGloss(argument[1], argument[2]));
+                        New(argument[1], argument[2]);
                     }
                     else if(argument.Length == 1)
                     {
                         string swe_input = Input("Write word in Swedish: ");
                         string eng_input = Input("Write word in English: ");
-                        dictionary.Add(new SweEngGloss(swe_input, eng_input));
+                        New(swe_input, eng_input);
                     }
                 }
                 else if (command == "delete")
@@ -131,13 +130,18 @@
             while (exit != true);
         }
 
-        private static void Delete(string input_1, string input_2)
+        private static void New(string swe_input, string eng_input)
+        {
+            dictionary.Add(new SweEngGloss(swe_input, eng_input)); // NYI: Prevent empty strings
+        }
+
+        private static void Delete(string swe_input, string eng_input)
         {
             int index = -1;
             for (int i = 0; i < dictionary.Count; i++) // FIXME: Unhandled exception. System.ArgumentOutOfRangeException
             {
                 SweEngGloss gloss = dictionary[i];
-                if (gloss.word_swe == input_1 && gloss.word_eng == input_2)
+                if (gloss.word_swe == swe_input && gloss.word_eng == eng_input)
                     index = i;
             }
             dictionary.RemoveAt(index);
