@@ -134,18 +134,25 @@
             {
                 foreach (SweEngGloss gloss in dictionary)
                 {
-                    Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}"); // FIXME: Unhandled exception. System.NullReferenceException
+                    Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
                 }
             }
             catch (System.NullReferenceException ex)
             {
-                Console.WriteLine("No file has been loaded into the program.\nPlease load a file first.");
+                Console.WriteLine("No file has been loaded into the program.\nPlease load a file first!");
             }
         }
 
         private static void New(string swe_input, string eng_input)
         {
-            dictionary.Add(new SweEngGloss(swe_input, eng_input)); // NYI: Prevent empty strings
+            if (swe_input == "" || eng_input == "")
+            {
+                Console.WriteLine("You can't enter an empty input.\nPlease try again!");
+            }
+            else
+            {
+                dictionary.Add(new SweEngGloss(swe_input, eng_input));
+            }
         }
 
         private static void Delete(string swe_input, string eng_input)
