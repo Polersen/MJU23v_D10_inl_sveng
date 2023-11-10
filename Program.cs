@@ -116,29 +116,16 @@
                         dictionary.RemoveAt(index);
                     }
                 }
-                // TODO: Break out translate method
-                else if (command == "translate") // NYI: If word does not exist
+                else if (command == "translate")
                 {
                     if (argument.Length == 2)
                     {
-                        foreach(SweEngGloss gloss in dictionary)
-                        {
-                            if (gloss.word_swe == argument[1])
-                                Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                            if (gloss.word_eng == argument[1])
-                                Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
-                        }
+                        Translate(argument[1]);
                     }
                     else if (argument.Length == 1)
                     {
                         string input = Input("Write word to be translated: ");
-                        foreach (SweEngGloss gloss in dictionary)
-                        {
-                            if (gloss.word_swe == input)
-                                Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                            if (gloss.word_eng == input)
-                                Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
-                        }
+                        Translate(input);
                     }
                 }
                 else if (command == "help")
@@ -147,6 +134,7 @@
                 }
                 else if (command == "save")
                 {
+                    // This is not part of the assignment, just a bit of extra practice for fun
                     // NYI: Code to save list to file
                 }
                 else
@@ -156,6 +144,17 @@
                 // TODO: Add save to file method
             }
             while (exit != true);
+        }
+
+        private static void Translate(string input)  // NYI: If word does not exist
+        {
+            foreach (SweEngGloss gloss in dictionary)
+            {
+                if (gloss.word_swe == input)
+                    Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                if (gloss.word_eng == input)
+                    Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+            }
         }
 
         private static void Help()
