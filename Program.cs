@@ -18,6 +18,7 @@
         }
         static void Main(string[] args)
         {
+            bool exit = false;
             string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
             Console.WriteLine("Welcome to the dictionary app!\nEnter \"help\" to see various commands.\nEnter \"quit\" to stop.");
             do
@@ -28,6 +29,7 @@
                 if (command == "quit") // NYI: quit does not shut down program
                 {
                     Console.WriteLine("Goodbye!");
+                    exit = true;
                 }
                 // TODO: Break out load method
                 else if (command == "load")
@@ -102,7 +104,7 @@
                     {
                         Console.WriteLine("Write word in Swedish: ");
                         string s = Console.ReadLine();
-                        Console.Write("Write word in English: "); // FIXME: Add WriteLine instead of Write
+                        Console.WriteLine("Write word in English: ");
                         string e = Console.ReadLine();
                         int index = -1;
                         for (int i = 0; i < dictionary.Count; i++)
@@ -161,7 +163,7 @@
                 }
                 // TODO: Add save to file method
             }
-            while (true);
+            while (exit != true);
         }
     }
 }
