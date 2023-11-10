@@ -89,31 +89,17 @@
                         dictionary.Add(new SweEngGloss(swe_input, eng_input));
                     }
                 }
-                // TODO: Break out delete method
                 else if (command == "delete")
                 {
-                    if (argument.Length == 3) // FIXME: Unhandled exception. System.ArgumentOutOfRangeException
+                    if (argument.Length == 3)
                     {
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++) {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
-                                index = i;
-                        }
-                        dictionary.RemoveAt(index);
+                        Delete(argument[1], argument[2]);
                     }
-                    else if (argument.Length == 1) // FIXME: Unhandled exception. System.ArgumentOutOfRangeException
+                    else if (argument.Length == 1)
                     {
                         string swe_input = Input("Write word in Swedish: ");
                         string eng_input = Input("Write word in English: ");
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++)
-                        {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == swe_input && gloss.word_eng == eng_input)
-                                index = i;
-                        }
-                        dictionary.RemoveAt(index);
+                        Delete(swe_input, eng_input);
                     }
                 }
                 else if (command == "translate")
@@ -141,12 +127,23 @@
                 {
                     Console.WriteLine($"Unknown command: '{command}'");
                 }
-                // TODO: Add save to file method
             }
             while (exit != true);
         }
 
-        private static void Translate(string input)  // NYI: If word does not exist
+        private static void Delete(string input_1, string input_2)
+        {
+            int index = -1;
+            for (int i = 0; i < dictionary.Count; i++) // FIXME: Unhandled exception. System.ArgumentOutOfRangeException
+            {
+                SweEngGloss gloss = dictionary[i];
+                if (gloss.word_swe == input_1 && gloss.word_eng == input_2)
+                    index = i;
+            }
+            dictionary.RemoveAt(index);
+        }
+
+        private static void Translate(string input) // NYI: If word does not exist
         {
             foreach (SweEngGloss gloss in dictionary)
             {
@@ -168,5 +165,6 @@
                                                 "-translate\t---\t\tTranslates the word chosen.\n" +
                                                 "-save\t\t---\t\tSaves the list (not yet implemented).");
         }
+        // TODO: Add save to file method
     }
 }
