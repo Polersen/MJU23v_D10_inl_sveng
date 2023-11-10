@@ -81,10 +81,10 @@
                     else if(argument.Length == 1)
                     {
                         Console.WriteLine("Write word in Swedish: ");
-                        string s = Console.ReadLine();
+                        string swe_input = Console.ReadLine();
                         Console.Write("Write word in English: ");
-                        string e = Console.ReadLine();
-                        dictionary.Add(new SweEngGloss(s, e));
+                        string eng_input = Console.ReadLine();
+                        dictionary.Add(new SweEngGloss(swe_input, eng_input));
                     }
                 }
                 // TODO: Break out delete method
@@ -103,14 +103,14 @@
                     else if (argument.Length == 1) // FIXME: Unhandled exception. System.ArgumentOutOfRangeException
                     {
                         Console.WriteLine("Write word in Swedish: ");
-                        string s = Console.ReadLine();
+                        string swe_input = Console.ReadLine();
                         Console.WriteLine("Write word in English: ");
-                        string e = Console.ReadLine();
+                        string eng_input = Console.ReadLine();
                         int index = -1;
                         for (int i = 0; i < dictionary.Count; i++)
                         {
                             SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == s && gloss.word_eng == e)
+                            if (gloss.word_swe == swe_input && gloss.word_eng == eng_input)
                                 index = i;
                         }
                         dictionary.RemoveAt(index);
@@ -132,12 +132,12 @@
                     else if (argument.Length == 1)
                     {
                         Console.WriteLine("Write word to be translated: ");
-                        string s = Console.ReadLine();
+                        string input = Console.ReadLine();
                         foreach (SweEngGloss gloss in dictionary)
                         {
-                            if (gloss.word_swe == s)
+                            if (gloss.word_swe == input)
                                 Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                            if (gloss.word_eng == s)
+                            if (gloss.word_eng == input)
                                 Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
                         }
                     }
