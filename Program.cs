@@ -143,14 +143,7 @@
                 }
                 else if (command == "help")
                 {
-                    Console.WriteLine("-help\t\t---\t\tShows various commands.\n" +
-                                    "-quit\t\t---\t\tStops the program.\n" +
-                                    "-load\t\t---\t\tLoads either default or chosen file into program.\n" +
-                                    "-list\t\t---\t\tLists the contents of the list.\n" +
-                                    "-new\t\t---\t\tAdds new content to the list.\n" +
-                                    "-delete\t\t---\t\tDeletes chosen content from the list.\n" +
-                                    "-translate\t---\t\tTranslates the word chosen.\n" +
-                                    "-save\t\t---\t\tSaves the list (not yet implemented).");
+                    Help();
                 }
                 else if (command == "save")
                 {
@@ -163,6 +156,18 @@
                 // TODO: Add save to file method
             }
             while (exit != true);
+        }
+
+        private static void Help()
+        {
+            Console.WriteLine("-help\t\t---\t\tShows various commands.\n" +
+                                                "-quit\t\t---\t\tStops the program.\n" +
+                                                "-load\t\t---\t\tLoads either default or chosen file into program.\n" +
+                                                "-list\t\t---\t\tLists the contents of the list.\n" +
+                                                "-new\t\t---\t\tAdds new content to the list.\n" +
+                                                "-delete\t\t---\t\tDeletes chosen content from the list.\n" +
+                                                "-translate\t---\t\tTranslates the word chosen.\n" +
+                                                "-save\t\t---\t\tSaves the list (not yet implemented).");
         }
     }
 }
