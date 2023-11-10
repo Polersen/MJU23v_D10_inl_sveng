@@ -130,9 +130,16 @@
 
         private static void List()
         {
-            foreach (SweEngGloss gloss in dictionary)
+            try
             {
-                Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}"); // FIXME: Unhandled exception. System.NullReferenceException
+                foreach (SweEngGloss gloss in dictionary)
+                {
+                    Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}"); // FIXME: Unhandled exception. System.NullReferenceException
+                }
+            }
+            catch (System.NullReferenceException ex)
+            {
+                Console.WriteLine("No file has been loaded into the program.\nPlease load a file first.");
             }
         }
 
