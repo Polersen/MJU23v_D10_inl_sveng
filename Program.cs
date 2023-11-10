@@ -67,13 +67,9 @@
                         }
                     }
                 }
-                // TODO: Break out list method
-                else if (command == "list")  // FIXME: Unhandled exception. System.NullReferenceException
+                else if (command == "list")
                 {
-                    foreach(SweEngGloss gloss in dictionary)
-                    {
-                        Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
-                    }
+                    List();
                 }
                 else if (command == "new")
                 {
@@ -128,6 +124,14 @@
                 }
             }
             while (exit != true);
+        }
+
+        private static void List()
+        {
+            foreach (SweEngGloss gloss in dictionary)
+            {
+                Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}"); // FIXME: Unhandled exception. System.NullReferenceException
+            }
         }
 
         private static void New(string swe_input, string eng_input)
