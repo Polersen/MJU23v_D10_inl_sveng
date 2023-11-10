@@ -30,41 +30,20 @@
             {
                 string[] argument = Input("> ").Split();
                 string command = argument[0];
-                if (command == "quit") // NYI: quit does not shut down program
+                if (command == "quit")
                 {
                     Console.WriteLine("Goodbye!");
                     exit = true;
                 }
-                // TODO: Break out load method
                 else if (command == "load")
                 {
-                    if(argument.Length == 2) //FIXME: Unhandled exception. System.IO.FileNotFoundException
+                    if(argument.Length == 2)
                     {
-                        using (StreamReader sr = new StreamReader(argument[1]))
-                        {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
-                        }
+                        Load(argument[1]);
                     }
                     else if(argument.Length == 1)
                     {
-                        using (StreamReader sr = new StreamReader(defaultFile))
-                        {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
-                        }
+                        Load(defaultFile);
                     }
                 }
                 else if (command == "list")
@@ -124,6 +103,21 @@
                 }
             }
             while (exit != true);
+        }
+
+        private static void Load(string file)
+        {
+            using (StreamReader sr = new StreamReader(file)) //FIXME: Unhandled exception. System.IO.FileNotFoundException
+            {
+                dictionary = new List<SweEngGloss>(); // Empty it!
+                string line = sr.ReadLine();
+                while (line != null)
+                {
+                    SweEngGloss gloss = new SweEngGloss(line);
+                    dictionary.Add(gloss);
+                    line = sr.ReadLine();
+                }
+            }
         }
 
         private static void List()
