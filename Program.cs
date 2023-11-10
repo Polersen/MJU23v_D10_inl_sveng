@@ -16,6 +16,11 @@
                 this.word_swe = words[0]; this.word_eng = words[1];
             }
         }
+        static string Input(string prompt)
+        {
+            Console.Write(prompt);
+            return Console.ReadLine();
+        }
         static void Main(string[] args)
         {
             bool exit = false;
@@ -23,8 +28,7 @@
             Console.WriteLine("Welcome to the dictionary app!\nEnter \"help\" to see various commands.\nEnter \"quit\" to stop.");
             do
             {
-                Console.Write("> "); // TODO: Break out input method
-                string[] argument = Console.ReadLine().Split();
+                string[] argument = Input("> ").Split();
                 string command = argument[0];
                 if (command == "quit") // NYI: quit does not shut down program
                 {
@@ -80,10 +84,8 @@
                     }
                     else if(argument.Length == 1)
                     {
-                        Console.WriteLine("Write word in Swedish: ");
-                        string swe_input = Console.ReadLine();
-                        Console.Write("Write word in English: ");
-                        string eng_input = Console.ReadLine();
+                        string swe_input = Input("Write word in Swedish: ");
+                        string eng_input = Input("Write word in English: ");
                         dictionary.Add(new SweEngGloss(swe_input, eng_input));
                     }
                 }
@@ -102,10 +104,8 @@
                     }
                     else if (argument.Length == 1) // FIXME: Unhandled exception. System.ArgumentOutOfRangeException
                     {
-                        Console.WriteLine("Write word in Swedish: ");
-                        string swe_input = Console.ReadLine();
-                        Console.WriteLine("Write word in English: ");
-                        string eng_input = Console.ReadLine();
+                        string swe_input = Input("Write word in Swedish: ");
+                        string eng_input = Input("Write word in English: ");
                         int index = -1;
                         for (int i = 0; i < dictionary.Count; i++)
                         {
@@ -131,8 +131,7 @@
                     }
                     else if (argument.Length == 1)
                     {
-                        Console.WriteLine("Write word to be translated: ");
-                        string input = Console.ReadLine();
+                        string input = Input("Write word to be translated: ");
                         foreach (SweEngGloss gloss in dictionary)
                         {
                             if (gloss.word_swe == input)
