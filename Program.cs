@@ -107,16 +107,24 @@
 
         private static void Load(string file)
         {
-            using (StreamReader sr = new StreamReader($"..\\..\\..\\dict\\{file}")) //FIXME: Unhandled exception. System.IO.FileNotFoundException
+            try
             {
-                dictionary = new List<SweEngGloss>(); // Empty it!
-                string line = sr.ReadLine();
-                while (line != null)
+                using (StreamReader sr = new StreamReader($"..\\..\\..\\dict\\{file}"))
                 {
-                    SweEngGloss gloss = new SweEngGloss(line);
-                    dictionary.Add(gloss);
-                    line = sr.ReadLine();
+                    dictionary = new List<SweEngGloss>(); // Empty it!
+                    string line = sr.ReadLine();
+                    while (line != null)
+                    {
+                        SweEngGloss gloss = new SweEngGloss(line);
+                        dictionary.Add(gloss);
+                        line = sr.ReadLine();
+                    }
                 }
+            }
+            catch (System.IO.FileNotFoundException ex)
+            {
+                string fileNameOnly = System.IO.Path.GetFileName(ex.FileName);
+                Console.WriteLine($"The specified file \"{fileNameOnly}\" could not be found.\nPlease try again!");
             }
         }
 
