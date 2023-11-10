@@ -24,7 +24,7 @@
         static void Main(string[] args)
         {
             bool exit = false;
-            string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
+            string defaultFile = "sweeng.lis";
             Console.WriteLine("Welcome to the dictionary app!\nEnter \"help\" to see various commands.\nEnter \"quit\" to stop.");
             do
             {
@@ -107,7 +107,7 @@
 
         private static void Load(string file)
         {
-            using (StreamReader sr = new StreamReader(file)) //FIXME: Unhandled exception. System.IO.FileNotFoundException
+            using (StreamReader sr = new StreamReader($"..\\..\\..\\dict\\{file}")) //FIXME: Unhandled exception. System.IO.FileNotFoundException
             {
                 dictionary = new List<SweEngGloss>(); // Empty it!
                 string line = sr.ReadLine();
