@@ -152,7 +152,14 @@
             }
             else
             {
-                dictionary.Add(new SweEngGloss(swe_input, eng_input)); // FIXME: System.NullReferenceException
+                try
+                {
+                    dictionary.Add(new SweEngGloss(swe_input, eng_input));
+                }
+                catch (System.NullReferenceException ex)
+                {
+                    Console.WriteLine("No file has been loaded into the program.\nPlease load a file first!");
+                }
             }
         }
 
