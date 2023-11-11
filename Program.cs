@@ -175,14 +175,31 @@
             }
         }
 
-        private static void Translate(string input) // NYI: If word does not exist
+        private static void Translate(string input)
         {
-            foreach (SweEngGloss gloss in dictionary)
+            bool found = false;
+
+            if (input == "")
+                Console.WriteLine("You entered an empty input.\nPlease try again!");
+            else
             {
-                if (gloss.word_swe == input)
-                    Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                if (gloss.word_eng == input)
-                    Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                foreach (SweEngGloss gloss in dictionary)
+                {
+                    if (gloss.word_swe == input)
+                    {
+                        Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                        found = true;
+                        break;
+                    }
+                    if (gloss.word_eng == input)
+                    {
+                        Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                    Console.WriteLine($"{input} could not be found and therefor not translated.\nPlease try again!");
             }
         }
 
