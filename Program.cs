@@ -166,19 +166,27 @@
         private static void Delete(string swe_input, string eng_input)
         {
             int index = -1;
-            for (int i = 0; i < dictionary.Count; i++) // FIXME: System.NullReferenceException
-            {
-                SweEngGloss gloss = dictionary[i];
-                if (gloss.word_swe == swe_input && gloss.word_eng == eng_input)
-                    index = i;
-            }
             try
             {
-                dictionary.RemoveAt(index);
+                for (int i = 0; i < dictionary.Count; i++) // FIXME: System.NullReferenceException
+                {
+                    SweEngGloss gloss = dictionary[i];
+                    if (gloss.word_swe == swe_input && gloss.word_eng == eng_input)
+                        index = i;
+                }
+
+                try
+                {
+                    dictionary.RemoveAt(index);
+                }
+                catch (System.ArgumentOutOfRangeException ex)
+                {
+                    Console.WriteLine($"{swe_input} and {eng_input} could not be found and therefor not deleted.\nPlease try again!");
+                }
             }
-            catch (System.ArgumentOutOfRangeException ex)
+            catch (System.NullReferenceException ex)
             {
-                Console.WriteLine($"{swe_input} and {eng_input} could not be found and therefor not deleted.\nPlease try again!");
+                Console.WriteLine("No file has been loaded into the program.\nPlease load a file first!");
             }
         }
 
