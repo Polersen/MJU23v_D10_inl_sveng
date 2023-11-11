@@ -168,7 +168,7 @@
             int index = -1;
             try
             {
-                for (int i = 0; i < dictionary.Count; i++) // FIXME: System.NullReferenceException
+                for (int i = 0; i < dictionary.Count; i++)
                 {
                     SweEngGloss gloss = dictionary[i];
                     if (gloss.word_swe == swe_input && gloss.word_eng == eng_input)
@@ -198,23 +198,30 @@
                 Console.WriteLine("You entered an empty input.\nPlease try again!");
             else
             {
-                foreach (SweEngGloss gloss in dictionary) // FIXME: System.NullReferenceException
+                try
                 {
-                    if (gloss.word_swe == input)
+                    foreach (SweEngGloss gloss in dictionary)
                     {
-                        Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                        found = true;
-                        break;
+                        if (gloss.word_swe == input)
+                        {
+                            Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                            found = true;
+                            break;
+                        }
+                        if (gloss.word_eng == input)
+                        {
+                            Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                            found = true;
+                            break;
+                        }
                     }
-                    if (gloss.word_eng == input)
-                    {
-                        Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
-                        found = true;
-                        break;
-                    }
+                    if (!found)
+                        Console.WriteLine($"{input} could not be found and therefor not translated.\nPlease try again!");
                 }
-                if (!found)
-                    Console.WriteLine($"{input} could not be found and therefor not translated.\nPlease try again!");
+                catch (System.NullReferenceException ex)
+                {
+                    Console.WriteLine("No file has been loaded into the program.\nPlease load a file first!");
+                }
             }
         }
 
