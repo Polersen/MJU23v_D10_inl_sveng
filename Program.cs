@@ -105,6 +105,7 @@
             while (exit != true);
         }
 
+        // FIXME: System.NullReferenceException for all methods if file hasn't been loaded
         private static void Load(string file)
         {
             try
@@ -158,13 +159,20 @@
         private static void Delete(string swe_input, string eng_input)
         {
             int index = -1;
-            for (int i = 0; i < dictionary.Count; i++) // FIXME: Unhandled exception. System.ArgumentOutOfRangeException
+            for (int i = 0; i < dictionary.Count; i++)
             {
                 SweEngGloss gloss = dictionary[i];
                 if (gloss.word_swe == swe_input && gloss.word_eng == eng_input)
                     index = i;
             }
-            dictionary.RemoveAt(index);
+            try
+            {
+                dictionary.RemoveAt(index);
+            }
+            catch (System.ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine($"{swe_input} and {eng_input} could not be found and therefor not deleted.\nPlease try again!");
+            }
         }
 
         private static void Translate(string input) // NYI: If word does not exist
