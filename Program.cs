@@ -152,14 +152,14 @@
             }
             else
             {
-                dictionary.Add(new SweEngGloss(swe_input, eng_input));
+                dictionary.Add(new SweEngGloss(swe_input, eng_input)); // FIXME: System.NullReferenceException
             }
         }
 
         private static void Delete(string swe_input, string eng_input)
         {
             int index = -1;
-            for (int i = 0; i < dictionary.Count; i++)
+            for (int i = 0; i < dictionary.Count; i++) // FIXME: System.NullReferenceException
             {
                 SweEngGloss gloss = dictionary[i];
                 if (gloss.word_swe == swe_input && gloss.word_eng == eng_input)
@@ -183,7 +183,7 @@
                 Console.WriteLine("You entered an empty input.\nPlease try again!");
             else
             {
-                foreach (SweEngGloss gloss in dictionary)
+                foreach (SweEngGloss gloss in dictionary) // FIXME: System.NullReferenceException
                 {
                     if (gloss.word_swe == input)
                     {
